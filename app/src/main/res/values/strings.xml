@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">L04_Reservation</string>
+    <string name="textViewTitle">Make your reservation now</string>
+    <string name="editTextName">Name</string>
+    <string name="editTextPhone">Phone</string>
+    <string name="editTextPax">Number of Pax</string>
+    <string name="chckBxSmoke">Smoking Area</string>
+    <string name="buttonCfm">CONFIRM</string>
+    <string name="buttonReset">RESET</string>
+</resources>
