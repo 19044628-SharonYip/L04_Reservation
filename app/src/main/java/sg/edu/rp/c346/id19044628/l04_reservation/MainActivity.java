@@ -45,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
         btnCfm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chckBxSmoke.isChecked())
-                {
-                    tvDetails.setText("Hi "+edName.getText()+", reservation confirmed on "+dp.getDayOfMonth()+"/"+(dp.getMonth()+1)+"/"+dp.getYear()+" at "+tp.getCurrentHour()+":"+tp.getCurrentMinute()+", seating in smoking area with total of "+edPax.getText()+". Thank you for your reservation!");
+                if(!(edName.getText().toString().isEmpty()) && !(edPhone.getText().toString().isEmpty()) && !(edPax.getText().toString().isEmpty())) {
+                    if (chckBxSmoke.isChecked()) {
+                        tvDetails.setText("Hi " + edName.getText() + ", reservation confirmed on " + dp.getDayOfMonth() + "/" + (dp.getMonth() + 1) + "/" + dp.getYear() + " at " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ", seating in smoking area with total of " + edPax.getText() + ". Thank you for your reservation!");
+                    } else {
+                        tvDetails.setText("Hi " + edName.getText() + ", reservation confirmed on " + dp.getDayOfMonth() + "/" + (dp.getMonth() + 1) + "/" + dp.getYear() + " at " + tp.getCurrentHour() + ":" + tp.getCurrentMinute() + ", seating in non-smoking area with total of" + edPax.getText() + ".Your phone number is "+edPhone.getText()+". Thank you for your reservation!");
+                    }
+                    Toast.makeText(MainActivity.this, "Reservation Made!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    tvDetails.setText("Hi "+edName.getText()+", reservation confirmed on "+dp.getDayOfMonth()+"/"+(dp.getMonth()+1)+"/"+dp.getYear()+" at "+tp.getCurrentHour()+":"+tp.getCurrentMinute()+", seating in non-smoking area with total of" +edPax.getText()+". Thank you for your reservation!");
+                    Toast.makeText(MainActivity.this, "Please fill in the details!", Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(MainActivity.this,"Reservation Made!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -72,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(MainActivity.this,"Reset details", Toast.LENGTH_SHORT).show();
             }
+        });
+
+                tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+                    @Override
+                    public void onTimeChanged(TimePicker v, int hourOfDay, int minute) {
+                        if (tp.getCurrentHour() > 20 || tp.getCurrentHour() < 8)
+                        {
+                            Toast.makeText(getApplicationContext(), "Please choose a time between 8AM and 8:59PM inclusive!", Toast.LENGTH_LONG).show();
+                            tp.setCurrentHour(19);
+                            tp.setCurrentMinute(30);
+                        }
+                    }
         });
     }
 }
