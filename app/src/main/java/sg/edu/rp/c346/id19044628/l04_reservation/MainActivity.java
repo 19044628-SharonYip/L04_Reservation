@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,12 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 {
                     tvDetails.setText("Hi "+edName.getText()+", reservation confirmed on "+dp.getDayOfMonth()+"/"+(dp.getMonth()+1)+"/"+dp.getYear()+" at "+tp.getCurrentHour()+":"+tp.getCurrentMinute()+", seating in non-smoking area with total of" +edPax.getText()+". Thank you for your reservation!");
                 }
+                Toast.makeText(MainActivity.this,"Reservation Made!", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dp.updateDate(2019,12,1);
                 tp.setCurrentHour(0);
                 tp.setCurrentMinute(0);
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 edPax.setText("");
                 chckBxSmoke.setChecked(false);
                 tvDetails.setText("");
+
+                Toast.makeText(MainActivity.this,"Reset details", Toast.LENGTH_SHORT).show();
             }
         });
     }
